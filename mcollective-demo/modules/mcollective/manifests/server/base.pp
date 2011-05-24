@@ -1,4 +1,5 @@
 class mcollective::server::base {
+
   class { 'mcollective': }
   class { 'mcollective::server::pkg': }
   class { 'mcollective::server::service': }
@@ -19,5 +20,11 @@ class mcollective::server::base {
     type        => 'agent',
     ddl         => true,
     application => true,
+  }
+  mcollective::plugins::plugin { 'meta':
+    ensure      => present,
+    type        => 'registration',
+    ddl         => false,
+    application => false,
   }
 }

@@ -40,6 +40,7 @@ class mcollective::params {
 
   $pkg_provider = $operatingsystem ? {
     /(?i-mx:ubuntu|debian)/ => 'aptitude',
+	/(?i-mx:rhel|centos)/ 	=> 'yum',
     default                 => undef,
   }
 

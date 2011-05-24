@@ -3,9 +3,12 @@ class mcollective::client::pkg {
   include 'mcollective::pkg'
 
   package { 'mcollective-client':
-    ensure   => $mcollective::params::pkg_state,
-    require  => Class['mcollective::pkg::debian'],
-    provider => 'aptitude',
+    ensure	  => latest,
+	#ensure   => "1.2.0-5.el5",
+    require   => $operatingsystem ? {
+	  /(?i-mx:ubuntu|debian)/ 	=> Class['mcollective::pkg::debian'],
+	  default					=> Class['mcollective::pkg::redhat'],
+	},
+    provider  => $mcollective::params::pkg_provider,
   }
-
 }
