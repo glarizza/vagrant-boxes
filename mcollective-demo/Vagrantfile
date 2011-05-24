@@ -2,8 +2,8 @@ Vagrant::Config.run do |config|
   # Change this box name depending on the system you want.
   #box = "squeeze64"
   #box = "centos5_64"
-  #box = "rhel60_64.box"
-  #box = "centos4_64.box"
+  #box = "rhel60_64"  -> Vagrant Errors
+  #box = "centos4_64" -> Vagrant Errors
 
 
   # Every Vagrant virtual environment requires a box to build off of.
@@ -23,8 +23,7 @@ Vagrant::Config.run do |config|
     }
 
     config.vm.define meta_vm['vm'] do |avm|
-      #avm.vm.network(meta_vm['ip'], :adapter => 1, :name => 'vboxnet0')   # NOTE: This fails with RHEL - network name.
-      avm.vm.network(meta_vm['ip'], :adapter => 1)
+      avm.vm.network(meta_vm['ip'], :adapter => 1, :name => 'vboxnet0')   # NOTE: This fails with RHEL and CentOS 4
 	  avm.vm.host_name = meta_vm['name']
       # This will provision the box using puppet
       Vagrant::Config.run do |subconfig|
