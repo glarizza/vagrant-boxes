@@ -31,8 +31,11 @@ class activemq::params  {
     default => '/var/log/activemq',
   }
 
+  $pkg_state = 'present'
+
   $pkg_provider = $operatingsystem ? {
     /(?i-mx:ubuntu|debian)/ => 'aptitude',
+	/(?i-mx:rhel|centos)/ 	=> 'yum',
     default                 => undef,
   }
 }
